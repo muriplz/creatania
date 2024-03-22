@@ -1,5 +1,5 @@
 package zaftnotameni.creatania.setup;
-import com.simibubi.create.foundation.block.BlockStressValues;
+import com.simibubi.create.content.kinetics.BlockStressValues;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.network.Networking;

@@ -1,7 +1,7 @@
 package zaftnotameni.creatania.machines.managenerator;
 
-import com.simibubi.create.content.contraptions.base.DirectionalAxisKineticBlock;
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
+import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -20,7 +20,7 @@ import zaftnotameni.creatania.registry.CreataniaBlockEntities;
 import static zaftnotameni.creatania.util.Voxel.ALMOST_FULL_BLOCK_VOXEL;
 import static zaftnotameni.creatania.util.Voxel.FULL_BLOCK_VOXEL;
 
-public class ManaGeneratorBlock extends DirectionalAxisKineticBlock implements ITE<ManaGeneratorBlockEntity> {
+public class ManaGeneratorBlock extends DirectionalAxisKineticBlock implements IBE<ManaGeneratorBlockEntity> {
   public ManaGeneratorBlock(Properties properties) {
     super(properties);
     registerDefaultState(defaultBlockState());
@@ -42,13 +42,13 @@ public class ManaGeneratorBlock extends DirectionalAxisKineticBlock implements I
   @Override
   public BlockState rotate(BlockState pState, Rotation pRotation) { return KineticManaMachine.rotate(pState, pRotation); }
   @Override
-  public BlockEntityType<? extends ManaGeneratorBlockEntity> getTileEntityType() { return CreataniaBlockEntities.MANA_GENERATOR_BLOCK_ENTITY.get(); }
+  public BlockEntityType<? extends ManaGeneratorBlockEntity> getBlockEntityType() { return CreataniaBlockEntities.MANA_GENERATOR_BLOCK_ENTITY.get(); }
   @Override
-  public Class<ManaGeneratorBlockEntity> getTileEntityClass() {
+  public Class<ManaGeneratorBlockEntity> getBlockEntityClass() {
     return ManaGeneratorBlockEntity.class;
   }
   @Override
-  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return new ManaGeneratorBlockEntity(getTileEntityType(), pos, state); }
+  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return new ManaGeneratorBlockEntity(getBlockEntityType(), pos, state); }
   @Override
   public SpeedLevel getMinimumRequiredSpeedLevel() {
     return SpeedLevel.NONE;

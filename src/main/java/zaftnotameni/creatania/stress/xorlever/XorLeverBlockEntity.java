@@ -1,6 +1,6 @@
 package zaftnotameni.creatania.stress.xorlever;
-import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
-public class XorLeverBlockEntity extends SmartTileEntity {
+public class XorLeverBlockEntity extends SmartBlockEntity {
   public int state = 0;
   public int lastChange;
   public LerpedFloat clientState;
@@ -50,7 +50,7 @@ public class XorLeverBlockEntity extends SmartTileEntity {
   private void updateOutput() { XorLeverBlock.updateNeighbors(getBlockState(), level, worldPosition); }
 
   @Override
-  public void addBehaviours(List<TileEntityBehaviour> behaviours) {}
+  public void addBehaviours(List<BlockEntityBehaviour> behaviours) {}
   public void toggleState() {
     int prevState = state;
     state = 15 - state;;

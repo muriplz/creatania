@@ -1,7 +1,7 @@
 package zaftnotameni.creatania.registry.datagen;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.contraptions.components.deployer.DeployerApplicationRecipe;
-import com.simibubi.create.content.contraptions.components.saw.CuttingRecipe;
+import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
+import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import com.simibubi.create.foundation.data.recipe.SequencedAssemblyRecipeGen;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -20,14 +20,14 @@ public class ForgeSequencedAssemblyRecipeProvider extends SequencedAssemblyRecip
     super(p_i48262_1_);
   }
   GeneratedRecipe MANA_MACHINE_COMPONENT = create(Constants.MANA_MACHINE_COMPONENT, r -> r.require(livingwood())
-    .transitionTo(CreataniaItems.INCOMPLETE_MANA_MACHINE_COMPONENT.get())
+    .transitionTo(CreataniaItems.INCOMPLETE_MANA_MACHINE_COMPONENT.asStack().getItem())
     .addOutput(new ItemStack(CreataniaBlocks.MANA_CASING.get().asItem(), 2), 1f)
     .loops(1)
     .addStep(CuttingRecipe::new, rr -> rr)
     .addStep(DeployerApplicationRecipe::new, rr -> rr.require(manasteel())));
 
   GeneratedRecipe XOR_LEVER = create(Constants.XOR_LEVER, r -> r.require(lever())
-    .transitionTo(CreataniaItems.INCOMPLETE_XOR_LEVER.get())
+    .transitionTo(CreataniaItems.INCOMPLETE_XOR_LEVER.asStack().getItem())
     .addOutput(new ItemStack(CreataniaBlocks.XOR_LEVER.get().asItem(), 2), 1f)
     .loops(1)
     .addStep(CuttingRecipe::new, rr -> rr)

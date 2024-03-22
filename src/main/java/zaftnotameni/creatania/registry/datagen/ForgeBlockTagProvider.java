@@ -2,6 +2,7 @@ package zaftnotameni.creatania.registry.datagen;
 import com.simibubi.create.AllBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.CreataniaBlocks;
@@ -19,15 +20,15 @@ public class ForgeBlockTagProvider extends BlockTagsProvider {
       CreataniaBlocks.MANA_CONDENSER.get());
 
     tag(Tags.Blocks.BOTANIA_TERRA_PLATE_BASE).add(
-      AllBlocks.ANDESITE_CASING.get(),
-      AllBlocks.COPPER_CASING.get(),
-      AllBlocks.BRASS_CASING.get(),
-      AllBlocks.RAILWAY_CASING.get(),
-      AllBlocks.FLUID_TANK.get(),
-      AllBlocks.ENCASED_FLUID_PIPE.get(),
-      CreataniaBlocks.MANA_GENERATOR.get(),
-      CreataniaBlocks.OMNIBOX.get(),
-      AllBlocks.FLUID_PIPE.get());
+      (Block) AllBlocks.ANDESITE_CASING.get(),
+      (Block) AllBlocks.COPPER_CASING.get(),
+      (Block) AllBlocks.BRASS_CASING.get(),
+      (Block) AllBlocks.RAILWAY_CASING.get(),
+      (Block) AllBlocks.FLUID_TANK.get(),
+      (Block) AllBlocks.ENCASED_FLUID_PIPE.get(),
+      (Block) CreataniaBlocks.MANA_GENERATOR.get(),
+      (Block) CreataniaBlocks.OMNIBOX.get(),
+      (Block) AllBlocks.FLUID_PIPE.get());
 
     tag(Tags.Blocks.FORGE_LAPIS).add(
       AllBlocks.ANDESITE_CASING.get(),

@@ -1,6 +1,6 @@
 package zaftnotameni.creatania.stress.xorlever;
 import com.mojang.math.Vector3f;
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -31,7 +31,7 @@ import zaftnotameni.creatania.registry.CreataniaBlockEntities;
 import java.util.Random;
 import java.util.function.Function;
 
-public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implements ITE<XorLeverBlockEntity> {
+public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implements IBE<XorLeverBlockEntity> {
   public XorLeverBlock(Properties pProperties) {
     super(pProperties);
   }
@@ -45,7 +45,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
     return InteractionResult.SUCCESS;
   }
   public InteractionResult useOnServer(Level worldIn, BlockPos pos, Player player) {
-    return onTileEntityUse(worldIn, pos, te -> {
+    return onBlockEntityUse(worldIn, pos, te -> {
       te.toggleState();
       float f = .25f + ((te.state + 5) / 15f) * .5f;
       worldIn.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.4F, f);
@@ -54,7 +54,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   }
   @Override
   public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
-    return getTileEntityOptional(blockAccess, pos).map(computeStateSignal(blockState, side)).orElse(0);
+    return getBlockEntityOptional(blockAccess, pos).map(computeStateSignal(blockState, side)).orElse(0);
   }
 
   public static final int SIGNAL_STRENGTH = CommonConfig.XOR_LEVER_SIGNAL_STRENGTH.get();
@@ -69,7 +69,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
 
   @OnlyIn(Dist.CLIENT)
   public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
-    withTileEntityDo(worldIn, pos, te -> {
+    withBlockEntityDo(worldIn, pos, te -> {
       if (rand.nextFloat() < 0.5F) {
         var delta = (getSignalDirection(te, stateIn) == getTrueFacing(stateIn)) ? -0.5f : 0.5f;
         addParticles(stateIn, worldIn, pos, 0.5F, delta);
@@ -81,7 +81,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
     if (isMoving || state.getBlock() == newState.getBlock())
       return;
-    withTileEntityDo(worldIn, pos, te -> {
+    withBlockEntityDo(worldIn, pos, te -> {
       if (te.state != 0) updateNeighbors(state, worldIn, pos);
       worldIn.removeBlockEntity(pos);
     });
@@ -119,12 +119,12 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   }
 
   @Override
-  public Class<XorLeverBlockEntity> getTileEntityClass() {
+  public Class<XorLeverBlockEntity> getBlockEntityClass() {
     return XorLeverBlockEntity.class;
   }
 
   @Override
-  public BlockEntityType<? extends XorLeverBlockEntity> getTileEntityType() {
+  public BlockEntityType<? extends XorLeverBlockEntity> getBlockEntityType() {
     return CreataniaBlockEntities.XOR_LEVER_BLOCK_ENTITY.get();
   }
 

@@ -2,11 +2,11 @@ package zaftnotameni.creatania.stress.xorlever;
 import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.AllBlockPartials;
-import com.simibubi.create.content.logistics.block.redstone.AnalogLeverBlock;
+import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlock;
+import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.tileEntity.renderer.SafeTileEntityRenderer;
 import com.simibubi.create.foundation.utility.AngleHelper;
 import com.simibubi.create.foundation.utility.Color;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
-public class XorLeverRenderer extends SafeTileEntityRenderer<XorLeverBlockEntity> {
+public class XorLeverRenderer extends SafeBlockEntityRenderer<XorLeverBlockEntity> {
 
   public XorLeverRenderer(BlockEntityRendererProvider.Context context) {
   }
@@ -32,7 +32,7 @@ public class XorLeverRenderer extends SafeTileEntityRenderer<XorLeverBlockEntity
     VertexConsumer vb = buffer.getBuffer(RenderType.solid());
 
     // Handle
-    SuperByteBuffer handle = CachedBufferer.partial(AllBlockPartials.ANALOG_LEVER_HANDLE, leverState);
+    SuperByteBuffer handle = CachedBufferer.partial(AllPartialModels.ANALOG_LEVER_HANDLE, leverState);
     float angle = (float) ((state / 15) * 90 / 180 * Math.PI);
     transform(handle, leverState).translate(1 / 2f, 1 / 16f, 1 / 2f)
       .rotate(Direction.EAST, angle)
@@ -42,7 +42,7 @@ public class XorLeverRenderer extends SafeTileEntityRenderer<XorLeverBlockEntity
 
     // Indicator
     int color = Color.mixColors(0x2C0300, 0xCD0000, state / 15f);
-    SuperByteBuffer indicator = transform(CachedBufferer.partial(AllBlockPartials.ANALOG_LEVER_INDICATOR, leverState), leverState);
+    SuperByteBuffer indicator = transform(CachedBufferer.partial(AllPartialModels.ANALOG_LEVER_INDICATOR, leverState), leverState);
     indicator.light(light)
       .color(color)
       .renderInto(ms, vb);

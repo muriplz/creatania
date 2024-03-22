@@ -1,9 +1,9 @@
 package zaftnotameni.creatania.machines.managenerator;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import com.simibubi.create.foundation.config.AllConfigs;
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,7 +33,7 @@ import java.util.List;
 
 import static zaftnotameni.creatania.util.Text.*;
 
-public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger, IAmParticleEmittingMachine, WandHUD {
+public class ManaGeneratorBlockEntity extends KineticBlockEntity implements IAmManaMachine, Log.IHasTickLogger, IAmParticleEmittingMachine, WandHUD {
   public boolean isFirstTick = true;
   public boolean active;
   public boolean duct;
@@ -74,7 +74,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     purple("").forGoggles(tooltip);
 
     String[] manaLabel = { "ALMOST NOTHING", "EXTREMELY LOW", "VERY LOW", "LOW" };
-    var index = Math.round(Math.abs(this.getSpeed()) * 3f /  AllConfigs.SERVER.kinetics.maxMotorSpeed.get());
+    var index = Math.round(Math.abs(this.getSpeed()) * 3f / AllConfigs.server().kinetics.maxRotationSpeed.get());
     muted("Real Mana Produced at current speed:").space()
       .add(red(manaLabel[index % 4])).forGoggles(tooltip);
 
@@ -102,7 +102,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     this.getManaGeneratorFluidHandler().invalidate();
   }
   @Override
-  public void addBehaviours(List<TileEntityBehaviour> behaviours) {
+  public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     super.addBehaviours(behaviours);
     this.getManaGeneratorFluidHandler().addBehaviours(behaviours);
     this.activeStateSynchronizerBehavior = new ActiveStateSynchronizerBehavior(this);

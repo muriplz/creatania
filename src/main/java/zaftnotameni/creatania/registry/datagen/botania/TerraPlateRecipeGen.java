@@ -32,7 +32,7 @@ public class TerraPlateRecipeGen extends BotaniaBaseRecipeGen implements DataPro
       .ingredient(Ingredient.of(AllBlocks.COGWHEEL.get().asItem()))
       .ingredient(Ingredient.of(AllBlocks.SHAFT.get().asItem()))
       .mana(10000)
-      .itemResult(new ItemStack(CreataniaBlocks.OMNIBOX.get().asItem(), 1))
+      .itemResult(new ItemStack(CreataniaBlocks.OMNIBOX.asStack().getItem(), 1))
       .build()
       .saveAs(CreataniaBlocks.OMNIBOX.getId(), pCache);
 

@@ -1,9 +1,9 @@
 package zaftnotameni.creatania.machines.manacondenser;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.AllBlockPartials;
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
+import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
 import net.minecraft.client.Minecraft;
@@ -15,22 +15,22 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.machines.manamachine.IAmParticleEmittingMachine;
-public class ManaCondenserRenderer extends KineticTileEntityRenderer {
+public class ManaCondenserRenderer extends KineticBlockEntityRenderer {
   public ManaCondenserRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
   }
   @Override
-  protected SuperByteBuffer getRotatedModel(KineticTileEntity te, BlockState state) {
-    return CachedBufferer.partialFacing(AllBlockPartials.SHAFT_HALF, state);
+  protected SuperByteBuffer getRotatedModel(KineticBlockEntity te, BlockState state) {
+    return CachedBufferer.partialFacing(AllPartialModels.SHAFT_HALF, state);
   }
   @Override
-  protected void renderSafe(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+  protected void renderSafe(KineticBlockEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
     var active = (te instanceof ManaCondenserBlockEntity generator) && generator.activeStateSynchronizerBehavior.active;
     renderFans(te, ms, buffer, active);
     if (active) this.spawnManaParticles(te, partialTicks);
   }
-  public void renderFans(KineticTileEntity te, PoseStack ms, MultiBufferSource buffer, boolean active) {
+  public void renderFans(KineticBlockEntity te, PoseStack ms, MultiBufferSource buffer, boolean active) {
     Direction direction = Direction.UP;
     Direction.Axis axis = Direction.Axis.Y;
 
@@ -39,7 +39,7 @@ public class ManaCondenserRenderer extends KineticTileEntityRenderer {
     int lightInFront = LevelRenderer.getLightColor(te.getLevel(), te.getBlockPos().relative(direction));
     var angle = getAngleForTe(te, te.getBlockPos(), axis);
 
-    SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(AllBlockPartials.ENCASED_FAN_INNER, te.getBlockState(), Direction.DOWN);
+    SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(AllPartialModels.ENCASED_FAN_INNER, te.getBlockState(), Direction.DOWN);
     if (active) kineticRotationTransform(fanInner1, te, axis, angle, lightInFront).renderInto(ms, vb);
     else fanInner1.renderInto(ms, vb);
   }
@@ -51,7 +51,7 @@ public class ManaCondenserRenderer extends KineticTileEntityRenderer {
   public float particlesEveryFTicks = ClientConfig.TICKS_PER_PARTICLE.get();
   public boolean enableManaParticles = ClientConfig.ENABLE_MANA_PARTICLES.get();
 
-  public void spawnManaParticles(KineticTileEntity te, float partialTicks) {
+  public void spawnManaParticles(KineticBlockEntity te, float partialTicks) {
     if (!this.enableManaParticles) return;
     if (Minecraft.getInstance().isPaused()) return;
     if (!(te instanceof IAmParticleEmittingMachine particleEmittingMachine)) return;

@@ -1,7 +1,7 @@
 package zaftnotameni.creatania.machines.manacondenser;
 
-import com.simibubi.create.content.contraptions.base.DirectionalAxisKineticBlock;
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
+import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -20,7 +20,7 @@ import zaftnotameni.creatania.registry.CreataniaBlockEntities;
 import static zaftnotameni.creatania.util.Voxel.ALMOST_FULL_BLOCK_VOXEL;
 import static zaftnotameni.creatania.util.Voxel.FULL_BLOCK_VOXEL;
 
-public class ManaCondenserBlock extends DirectionalAxisKineticBlock implements ITE<ManaCondenserBlockEntity> {
+public class ManaCondenserBlock extends DirectionalAxisKineticBlock implements IBE<ManaCondenserBlockEntity> {
   public ManaCondenserBlock(Properties properties) { super(properties);  registerDefaultState(defaultBlockState()); }
   @Override
   public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) { return KineticManaMachine.hasShaftTowards(state, face); }
@@ -35,17 +35,17 @@ public class ManaCondenserBlock extends DirectionalAxisKineticBlock implements I
     return state.getValue(FACING).getAxis();
   }
   @Override
-  public BlockEntityType<? extends ManaCondenserBlockEntity> getTileEntityType() { return CreataniaBlockEntities.MANA_CONDENSER_BLOCK_ENTITY.get();  }
+  public BlockEntityType<? extends ManaCondenserBlockEntity> getBlockEntityType() { return CreataniaBlockEntities.MANA_CONDENSER_BLOCK_ENTITY.get();  }
   @Override
   public BlockState rotate(BlockState pState, Rotation pRotation) { return KineticManaMachine.rotate(pState, pRotation); }
   @Override
-  public Class<ManaCondenserBlockEntity> getTileEntityClass() {
+  public Class<ManaCondenserBlockEntity> getBlockEntityClass() {
     return ManaCondenserBlockEntity.class;
   }
   @Override
   public BlockState getRotatedBlockState(BlockState originalState, Direction targetedFace) { return KineticManaMachine.rotate(originalState, targetedFace); }
   @Override
-  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return new ManaCondenserBlockEntity(getTileEntityType(), pos, state); }
+  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return new ManaCondenserBlockEntity(getBlockEntityType(), pos, state); }
   @Override
   public SpeedLevel getMinimumRequiredSpeedLevel() {
     return SpeedLevel.NONE;

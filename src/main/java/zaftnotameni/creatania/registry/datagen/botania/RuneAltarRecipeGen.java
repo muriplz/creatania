@@ -56,7 +56,7 @@ public class RuneAltarRecipeGen extends BotaniaBaseRecipeGen implements DataProv
       .ingredient(Ingredient.of(AllBlocks.GEARBOX.get().asItem()))
       .ingredient(Ingredient.of(AllItems.VERTICAL_GEARBOX.get().asItem()))
       .mana(5000)
-      .itemResult(new ItemStack(CreataniaBlocks.OMNIBOX.get().asItem(), 1))
+      .itemResult(new ItemStack(CreataniaBlocks.OMNIBOX.asStack().getItem(), 1))
       .build()
       .saveAs(CreataniaBlocks.OMNIBOX.getId(), pCache);
 

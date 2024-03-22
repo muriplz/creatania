@@ -1,7 +1,7 @@
 package zaftnotameni.creatania.mana.flowers.blazunia;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,7 +32,7 @@ import java.util.function.Supplier;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.*;
 
 @OnlyIn(value = Dist.CLIENT, _interface = WandHUD.class)
-public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity implements BotaniaFlowerInterfaces {
+public class BlazuniaFunctionalFlowerBlockEntity extends SmartBlockEntity implements BotaniaFlowerInterfaces {
   public LazyOptional<FunctionalFlowerHandler> lazyFlowerHandler = LazyOptional.of(() -> new FunctionalFlowerHandler(this)
     .withColor(0xffffff00)
     .withMaxMana(10000)
@@ -100,7 +100,7 @@ public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity impleme
     return hit;
   }
   @Override
-  public void addBehaviours(List<TileEntityBehaviour> behaviours) { }
+  public void addBehaviours(List<BlockEntityBehaviour> behaviours) { }
   @Override
   public void tick() {
     super.tick();

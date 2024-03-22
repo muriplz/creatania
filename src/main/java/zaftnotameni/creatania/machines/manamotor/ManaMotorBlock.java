@@ -1,7 +1,7 @@
 package zaftnotameni.creatania.machines.manamotor;
 
-import com.simibubi.create.content.contraptions.base.DirectionalAxisKineticBlock;
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
+import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -21,7 +21,7 @@ import zaftnotameni.creatania.registry.CreataniaBlockEntities;
 import static zaftnotameni.creatania.util.Voxel.ALMOST_FULL_BLOCK_VOXEL;
 import static zaftnotameni.creatania.util.Voxel.FULL_BLOCK_VOXEL;
 
-public class ManaMotorBlock extends DirectionalAxisKineticBlock implements ITE<ManaMotorBlockEntity> {
+public class ManaMotorBlock extends DirectionalAxisKineticBlock implements IBE<ManaMotorBlockEntity> {
   public ManaMotorBlock(Properties properties) {
     super(properties);
     registerDefaultState(defaultBlockState());
@@ -32,11 +32,11 @@ public class ManaMotorBlock extends DirectionalAxisKineticBlock implements ITE<M
   @Override
   public BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return CreataniaBlockEntities.MANA_MOTOR_BLOCK_ENTITY.create(pos, state);  }
   @Override
-  public Class<ManaMotorBlockEntity> getTileEntityClass() {
+  public Class<ManaMotorBlockEntity> getBlockEntityClass() {
     return ManaMotorBlockEntity.class;
   }
   @Override
-  public BlockEntityType<? extends ManaMotorBlockEntity> getTileEntityType() { return CreataniaBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get();  }
+  public BlockEntityType<? extends ManaMotorBlockEntity> getBlockEntityType() { return CreataniaBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get();  }
   @Override
   public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) { return KineticManaMachine.hasShaftTowards(state, face); }
   @Override

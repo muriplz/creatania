@@ -1,7 +1,8 @@
 package zaftnotameni.creatania.machines.managenerator;
+
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
-import com.simibubi.create.foundation.tileEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
@@ -25,7 +26,7 @@ public class ManaGeneratorFluidHandler {
     contentsChanged = true;
   }
 
-  public void addBehaviours(List<TileEntityBehaviour> behaviours) {
+  public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     this.inputTankBehavior = new SmartFluidTankBehaviour(
       SmartFluidTankBehaviour.INPUT,
       this.manaGenerator,

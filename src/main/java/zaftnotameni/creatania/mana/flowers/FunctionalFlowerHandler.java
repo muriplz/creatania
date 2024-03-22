@@ -1,6 +1,6 @@
 package zaftnotameni.creatania.mana.flowers;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +24,7 @@ import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerInterfaces> implements BotaniaFlowerInterfaces {
+public class FunctionalFlowerHandler<T extends SmartBlockEntity & BotaniaFlowerInterfaces> implements BotaniaFlowerInterfaces {
   public static final ResourceLocation MANA_POOL = new ResourceLocation("botania", "mana_pool");
   public static final ResourceLocation MANA_SPREADER = new ResourceLocation("botania", "mana_spreader");
   public BlockPos poolPosition;

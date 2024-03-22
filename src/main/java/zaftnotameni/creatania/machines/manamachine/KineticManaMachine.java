@@ -1,13 +1,13 @@
 package zaftnotameni.creatania.machines.manamachine;
 import com.google.common.base.Predicates;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;
-import com.simibubi.create.content.contraptions.components.motor.CreativeMotorTileEntity;
-import com.simibubi.create.foundation.config.AllConfigs;
-import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
-import com.simibubi.create.foundation.tileEntity.behaviour.CenteredSideValueBoxTransform;
-import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
+import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
+import com.simibubi.create.content.kinetics.motor.CreativeMotorBlockEntity;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.CenteredSideValueBoxTransform;
+import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -30,8 +30,9 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static com.simibubi.create.content.contraptions.base.KineticTileEntity.convertToDirection;
-public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
+import static com.simibubi.create.content.kinetics.base.KineticBlockEntity.convertToDirection;
+
+public class KineticManaMachine<T extends SmartBlockEntity & IAmManaMachine> {
   public int manaPerRpmPerTick = 1;
   public int rpmPerManaPerTick = 1;
   public int stressUnitsPerRpm = 1;
@@ -81,13 +82,13 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
   public static CenteredSideValueBoxTransform createTransformPointingAt(DirectionProperty dir) { return new CenteredSideValueBoxTransform((te, side) -> te.getValue(dir) == side); }
   public CenteredSideValueBoxTransform createTransformOppositeTo(DirectionProperty dir) { return new CenteredSideValueBoxTransform((te, side) -> te.getValue(dir) == side.getOpposite()); }
   public ScrollValueBehaviour createScrollBehavior(DirectionProperty dir) {
-    var maxRPM = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+    var maxRPM = AllConfigs.server().kinetics.maxRotationSpeed.get();
     var shaftSlot = createTransformOppositeTo(dir);
     var behavior = new ScrollValueBehaviour(Lang.translateDirect("generic.speed"), te, shaftSlot)
       .between(-maxRPM, maxRPM)
       .withUnit(i -> Lang.translateDirect("generic.unit.rpm"))
       .withCallback(te::updateGeneratedRotation)
-      .withStepFunction(CreativeMotorTileEntity::step);
+      .withStepFunction(CreativeMotorBlockEntity::step);
     behavior.value = this.baseRpm;
     behavior.scrollableValue = behavior.value;
     this.scrollValueBehaviour = behavior;
@@ -124,7 +125,7 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
     );
   }
   public int getMaximumSUPossible() {
-    return stressUnitsPerRpm * AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+    return stressUnitsPerRpm * AllConfigs.server().kinetics.maxRotationSpeed.get();
   }
   public int getAbsoluteSpeed() {
     var min = 1f;

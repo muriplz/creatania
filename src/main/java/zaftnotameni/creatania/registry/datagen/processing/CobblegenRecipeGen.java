@@ -1,8 +1,8 @@
 package zaftnotameni.creatania.registry.datagen.processing;
 
-import com.simibubi.create.content.palettes.AllPaletteStoneTypes;
+import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
-import com.simibubi.create.foundation.utility.recipe.IRecipeTypeInfo;
+import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.data.DataGenerator;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.StringUtils;
 import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipe;
 
-import static com.simibubi.create.content.palettes.AllPaletteStoneTypes.*;
+import static com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes.*;
 import static zaftnotameni.creatania.registry.CreataniaFluids.ALL;
 
 public class CobblegenRecipeGen extends ForgeCreateProcessingRecipeProvider {
